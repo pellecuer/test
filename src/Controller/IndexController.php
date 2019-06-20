@@ -44,8 +44,6 @@ class IndexController extends AbstractController
     {   
         // $currentMonth = $request->request->get('currentMonth');
         
-        
-        
         $works = [            
             ['Gestion de projet', 1, 1, 2, 2, 0, 2, 3, 4, 4, 4],
             ['Junior', 1, 1, 2, 2, 0, 2, 3, 4, 4, 4],
