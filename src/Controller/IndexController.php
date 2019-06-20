@@ -29,11 +29,12 @@ class IndexController extends AbstractController
             $dt = $dt->add($intervalOneMonth);
         }
         //dump($calendars);die;
-        $key = array_search($currentMonth->format('M-y'), $calendars);
+        $key = array_search($currentMonth->format('M-y'), $calendars)+1;
 
         return $this->render('index/index.html.twig', [            
             'calendars' => $calendars,
-            'key' => $key
+            'key' => $key,
+            'currentMonth' => $currentMonth->format('M-y')
         ]);
     }
 

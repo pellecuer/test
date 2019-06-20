@@ -5,15 +5,15 @@
 {% block body %}
 <div class="container-fluid">    
     <div class="jumbotron bg-dark">
-        <h1 class="text-center text-white">PROJET NUMERO1</h1>
+        <h1 class="text-center text-white">PROJET NUMERO1</h1>       
     </div>    
 </div>
 <div class="invisible" id="key">{{ (key) }}</div>
-<div class="container">
-    <h1>La réponse ici: <span id ="currentMonthResponse"></span></h1>
+<div class="container">   
     <div class="mb-5 text-right">
-        <button type="button" class="btn btn-primary previous">Mois précédent</button>        
-        <button type="button" class="btn btn-primary next">Mois suivant</button>
+        <button type="button" class="btn btn-primary previous"><i class="fas fa-step-backward"></i></button>
+        <span class="" id="currentMonth">{{ currentMonth }}</span>
+        <div class="btn btn-primary next"><i class="fas fa-step-forward"></i></div>    
     </div>
     <table id="example" class="display " style="width:100%">
         <thead>           
