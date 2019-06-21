@@ -8,6 +8,9 @@
         <h1 class="text-center text-white">PROJET NUMERO1</h1>       
     </div>    
 </div>
+<div class="container mt-5 invisible" id="response">
+    <div class="alert alert-success">Vous avez attribué la note de <span class="badge badge-secondary" id="rank"></span> </div>
+</div>
 <div class="invisible" id="key">{{ (key) }}</div>
 <div class="container">   
     <div class="mb-5 text-right">
@@ -15,7 +18,7 @@
         <span class="" id="currentMonth">{{ currentMonth }}</span>
         <div class="btn btn-primary next"><i class="fas fa-step-forward"></i></div>    
     </div>
-    <table id="example" class="display " style="width:100%">
+    <table id="example" class="display" style="width:100%">
         <thead>           
             <tr>
                 <th></th>                               
@@ -25,12 +28,12 @@
             </tr>
         </thead>
         <tbody>
-            {# {% for work in works %}
+            {% for work in works %}
             <tr>{% for row in work %}
                 <td class="edit-for"> {{ row }}</td>
                 {% endfor %} 
             </tr>
-            {% endfor %}  #}
+            {% endfor %} 
         </tbody>
         {# <tfoot>
             <tr>
@@ -40,6 +43,6 @@
                 {% endfor %}
             </tr>
         </tfoot>        #}
-    </table>    
+    </table> 
 </div>
 {% endblock %}

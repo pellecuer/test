@@ -22,6 +22,7 @@ class IndexController extends AbstractController
         $endProjectDate = new \DateTime('2019-11-01');
         $intervalOneMonth = new \DateInterval('P1M');
 
+        // calendar
         $calendars = [];
         $dt = clone $startProjectDate;
         while ($dt < $endProjectDate) {            
@@ -29,12 +30,26 @@ class IndexController extends AbstractController
             $dt = $dt->add($intervalOneMonth);
         }
         //dump($calendars);die;
+
+        //works
+        $works = [            
+            ['Gestion de projet', 1, 1, 2, 2, 0, 2, 3, 4, 4, 4],
+            ['Junior', 1, 1, 2, 2, 0, 2, 3, 4, 4, 4],
+            ['Design', 1, 1, 2, 2, 0, 2, 3, 4, 4, 4],
+            ['Lead', 1, 1, 2, 2, 0, 2, 3, 4, 4, 4],
+            ['Confirmé', 15, 1, 2, 2, 0, 2, 3, 4, 4, 4],            
+            ['Quality Assurance', 1, 1, 2, 2, 0, 2, 3, 4, 4, 4],
+            ['Projet Web', 1, 1, 2, 2, 0, 2, 3, 4, 4, 4],
+            ['Projet Mobile Android', 3, 1, 2, 2, 0, 2, 3, 4, 4, 4],           
+        ];  
+
         $key = array_search($currentMonth->format('M-y'), $calendars)+1;
 
         return $this->render('index/index.html.twig', [            
             'calendars' => $calendars,
             'key' => $key,
-            'currentMonth' => $currentMonth->format('M-y')
+            'currentMonth' => $currentMonth->format('M-y'),
+            'works' => $works
         ]);
     }
 
@@ -64,54 +79,25 @@ class IndexController extends AbstractController
     }
 
 
-    // /**
-    //  * @Route("/response", name="response")
-    //  */
-    // public function response(Request $request)
-    // {         
-    //     //get the currentMonth from Ajax
-    //     $currentMonth = $request->request->get('currentMonth');
-
-    //     if($currentMonth){
-    //         $works = [            
-    //             ['Gestion de projet', 5, 6, 7, 8, 9],
-    //             ['Junior', 1, 1, 2, 2, 0],
-    //             ['Design', 1, 1, 2, 2, 0],
-    //             ['Lead', 1, 1, 2, 2, 0],
-    //             ['Confirmé', 15, 1, 2, 2, 0],
-    //             ['Quality Assurance', 1, 1, 2, 2, 0],
-    //             ['Projet Web', 1, 1, 2, 2, 0],
-    //             ['Projet Mobile Android', 3, 1, 2, 2, 0],           
-    //         ];
-
-    //         $calendars = [            
-    //             'Nov-20',
-    //             'déc-18',
-    //             'Janv-19',
-    //             'Fév-19',
-    //             'Mars-19',
-    //         ];
-
-    //         return $this->json(
-    //             [                
-    //                 'data' => $works,
-    //                 'calendars' => $calendars,
-    //                 'currentMonth' => $currentMonth
-    //             ]
-    //         );
-    //     }
+    /**
+     * @Route("/response", name="response")
+     */
+    public function response(Request $request)
+    {         
+        //get new rank
+        $rank = $request->request->get('rank');
 
 
+        $response = new Response(json_encode([
+            'rank' =>  $rank
+        ]));
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
 
 
-
-        // $response = new Response(json_encode([
-        //     'currentMonth' =>  $currentMonth
-        // ]));
-
-        // $response->headers->set('Content-Type', 'application/json');
-        // return $response;
-    // }
+    
 
 
 }
