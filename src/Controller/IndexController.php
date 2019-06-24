@@ -41,7 +41,8 @@ class IndexController extends AbstractController
             ['Quality Assurance', 1, 1, 2, 2, 0, 2, 3, 4, 4, 4],
             ['Projet Web', 1, 1, 2, 2, 0, 2, 3, 4, 4, 4],
             ['Projet Mobile Android', 3, 1, 2, 2, 0, 2, 3, 4, 4, 4],           
-        ];  
+        ];
+         
 
         $key = array_search($currentMonth->format('M-y'), $calendars)+1;
 
@@ -86,6 +87,12 @@ class IndexController extends AbstractController
     {         
         //get new rank
         $rank = $request->request->get('rank');
+
+        //errors
+        $errors = [
+            'Erronée' => 'Vous devez entrer un chiffre compris entre 0 et 9',
+            'Vide' => 'Votre saisie est vide'
+        ];
 
 
         $response = new Response(json_encode([

@@ -34,20 +34,54 @@
         $(document).ready(function() {
 
             //Event handlers
-            $(".edit-for" ).on( "mouseenter", function(){
-                //$( this).css( "background-color", "#C6E2FF");
-                //$('html,body').css('cursor','crosshair');                
+            $(".edit-for" ).on( "click", function(){
+                $( this).css( "background-color", "#C6E2FF");                               
                 $(this).attr('contenteditable', 'true');
+                $(this).focus();
+               
             });
+
+            //Empty on double clic
+            $(".edit-for" ).on( "dblclick", function(){
+                $( this).empty(); 
+            });
+
+
             $(".edit-for" ).on( "mouseleave", function(){
-                //$( this).css( "background-color", "transparent");
+                $( this).css( "background-color", "transparent");
                 //$('html,body').css('cursor','crosshair');
                 $(this).attr('contenteditable', 'false');
             });
-            $(".edit-for" ).on( "keypress", function(){
-                //$('html,body').css('cursor','crosshair');
-                $(this).text('');
-            });     
+
+            //tab = next td            
+            $('td.edit-for').on( "keydown", function(e){
+                 var keyCode = e.keyCode || e.wich;                 
+                if ((e.keyCode === 9) || (e.keyCode === 39) || (e.keyCode === 13)) {
+                    e.preventDefault();
+                    $( this).css( "background-color", "transparent");                   
+                     var next = $(this).closest('td').next('td');
+
+                     next.css("background-color", "#C6E2FF");
+                     next.attr('contenteditable', 'true');                     
+                     next.focus();
+                } 
+            });
+
+            //tab = previous td
+            $('td.edit-for').on( "keydown", function(e){
+                 var keyCode = e.keyCode || e.wich;                 
+                if (e.keyCode === 37 ) {
+                    e.preventDefault();
+                    $( this).css( "background-color", "transparent");                   
+                     var next = $(this).closest('td').prev('td');
+
+                     next.css("background-color", "#C6E2FF");
+                     next.attr('contenteditable', 'true');                     
+                     next.focus();
+                } 
+            });
+
+                 
 
             var table = $('#example').DataTable({                
                     //ajax:'/ajax',                                 
@@ -128,6 +162,25 @@
                     }
                 });
             });
+
+            //delete object in DB
+            $('.trash').on( "click", function(){
+                //$(this).closest('tr').remove();
+                var personnage = $(this).closest('tr').find("td:nth-child(0)").html();
+
+                $( '#var' ).text(personnage);
+            });
+
+            //update object in DB
+            $('.update').on( "click", function(){
+                //$(this).closest('tr').remove();
+                var personnage = $(this).closest('tr').find("td:nth-child(1)").html();
+
+                $( '#producteur' ).text(personnage);
+            });
+            
+
+
 
         });
 
