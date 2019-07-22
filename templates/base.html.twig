@@ -33,17 +33,82 @@
         <script>
         $(document).ready(function() {
 
+            //Calculate
+            $(document).ready(function () {
+                calculateForOneRowClickable(); 
+                
+                //New function
+                function calculateForOneRowClickable(){
+                    var row = 0,
+                    col = 0,
+                    ncol = 0;
+                    var sum;
+
+                    var firstRowClickable =  $("#firsRowClickable");
+                    var arrayRowToCalculate = firstRowClickable.nextUntil('.poleclickable').add('tr');
+                    
+                    // sum by row                
+                    $(arrayRowToCalculate).each(function (rowindex) {
+                        sum = 0;
+                        col = 0;
+                        $(this).find("td").each(function (colindex) {
+                            col++;
+                            //newval = $(this).find("input").val();                     
+                            //if (isNaN(newval)) {
+                                //$(this).html(sum);
+                                if (col > ncol) {
+                                    ncol = col - 1
+                                }
+                            //} else {
+                            //  sum += parseInt(newval);
+                        //}
+                        });
+                    });
+
+                    // sum by col
+                    for (col = 1; col < ncol + 1; col++) {
+                        console.log("column: " + col);
+                        sum = 0;
+                        $($(arrayRowToCalculate).get().reverse()).each(function (rowindex) {
+                            $(this).find("td:nth-child(" + col + ")").each(function (rowindex) {
+                                newval = $(this).find("input").val();
+                                console.log(newval);
+                                if (isNaN(newval)) {
+                                    $(this).html(sum);
+                                } else {
+                                    sum += parseInt(newval);
+                                }
+                            });
+                        });
+                    }
+                }
+
+                
+            });
+
             //Event handlers
             $(".edit-for" ).on( "click", function(){
                 $( this).css( "background-color", "#C6E2FF");                               
                 $(this).attr('contenteditable', 'true');
                 $(this).focus();
                
+               
             });
 
             //Empty on double clic
-            $(".edit-for" ).on( "dblclick", function(){
-                $( this).empty(); 
+            $(".edit-for").on( "dblclick", function(){
+                //function(){
+                     $( '#response').append();
+                    var rank = $(this).html();
+                    //alert('coco');
+                    var availableRank = [1,2,3,4,5,6,7,8,9,10];
+                    if (jQuery.inArray(parseInt(rank), availableRank) ==-1){
+                        //Vous devez entrer un chiffre compris entre 1 et 9
+                        var response = 'Vous devez entrer un chiffre compris entre 1 et 9';
+                        $( '#response').text(response);
+                        $('#response').addClass("visible").removeClass("invisible");
+                    }
+                //}
             });
 
 

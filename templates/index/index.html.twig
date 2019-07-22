@@ -28,12 +28,27 @@
             </tr>
         </thead>
         <tbody>
-            {% for work in works %}
-            <tr>{% for row in work %}
-                <td class="edit-for"> {{ row }}</td>
-                {% endfor %} 
+             <tr class = "poleclickable bg-secondary text-white colsum" id="firsRowClickable">
+                 <td class>GDP</td>
+                 {% for calendar in calendars %} 
+                    <td></td>
+                {% endfor %}
             </tr>
-            {% endfor %} 
+            {% for work in works %}           
+            <tr>{% for row in work %}
+                <td class="edit-for"><input value={{ row }}></td> 
+                {% endfor %}
+                <td class="rowsum">test</td>                
+            {% endfor %}
+            </tr>            
+            <tr class = "poleclickable">
+                {% for calendar in calendars %}               
+                    <td class="">test</td>
+                  {% endfor %}               
+            </tr>
+            
+            
+                    
         </tbody>
 
         {# <tfoot>
@@ -44,7 +59,9 @@
                 {% endfor %}
             </tr>
         </tfoot>        #}
-    </table>    
+    </table>
+
+    
 </div>
 
 {% endblock %}
